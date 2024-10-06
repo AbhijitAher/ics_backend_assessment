@@ -8,8 +8,8 @@ const swaggerOptions = {
       version: "1.0.0",
       description: "API documentation for managing books",
       contact: {
-        name: "Your Name",
-        email: "your.email@example.com",
+        name: "Abhijit Aher",
+        email: "seabhi.aher@gmail.com",
       },
     },
     servers: [
