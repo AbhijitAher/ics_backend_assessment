@@ -8,6 +8,142 @@ const {
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * tags:
+ *   name: Books
+ *   description: API to manage books
+ */
+
+/**
+ * @swagger
+ * /books:
+ *   post:
+ *     summary: Create a new book
+ *     tags: [Books]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               publication_date:
+ *                 type: string
+ *                 format: date
+ *               author:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Book created successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 title:
+ *                   type: string
+ *                 publication_date:
+ *                   type: string
+ *                   format: date
+ *                 author:
+ *                   type: string
+ *       400:
+ *         description: Invalid input data
+ */
+
+/**
+ * @swagger
+ * /books:
+ *   get:
+ *     summary: Get all books
+ *     tags: [Books]
+ *     responses:
+ *       200:
+ *         description: A list of books
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   title:
+ *                     type: string
+ *                   publication_date:
+ *                     type: string
+ *                     format: date
+ *                   author:
+ *                     type: string
+ *       500:
+ *         description: Server error
+ */
+
+/**
+ * @swagger
+ * /books:
+ *   patch:
+ *     summary: Update an existing book
+ *     tags: [Books]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *               publication_date:
+ *                 type: string
+ *                 format: date
+ *               author:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Book updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 title:
+ *                   type: string
+ *                 publication_date:
+ *                   type: string
+ *                   format: date
+ *                 author:
+ *                   type: string
+ *       400:
+ *         description: Invalid ID format or input data
+ *       404:
+ *         description: Book not found
+ */
+
+/**
+ * @swagger
+ * /books/{id}:
+ *   delete:
+ *     summary: Mark a book as deleted
+ *     tags: [Books]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the book to delete
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Book marked as deleted successfully
+ *       400:
+ *         description: Invalid ID format
+ *       404:
+ *         description: Book not found
+ */
+
 router.post("/", createBook);
 router.get("/", getAllBooks);
 router.patch("/:id", updateBook);
