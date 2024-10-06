@@ -32,7 +32,7 @@ const router = express.Router();
  *                 type: string
  *               publication_date:
  *                 type: string
- *                 format: date
+ *                 format: date-time
  *               author:
  *                 type: string
  *     responses:
@@ -43,11 +43,13 @@ const router = express.Router();
  *             schema:
  *               type: object
  *               properties:
+ *                 _id:
+ *                   type: string
  *                 title:
  *                   type: string
  *                 publication_date:
  *                   type: string
- *                   format: date
+ *                   format: date-time
  *                 author:
  *                   type: string
  *       400:
@@ -70,11 +72,13 @@ const router = express.Router();
  *               items:
  *                 type: object
  *                 properties:
+ *                   _id:
+ *                     type: string
  *                   title:
  *                     type: string
  *                   publication_date:
  *                     type: string
- *                     format: date
+ *                     format: date-time
  *                   author:
  *                     type: string
  *       500:
@@ -83,10 +87,17 @@ const router = express.Router();
 
 /**
  * @swagger
- * /books:
+ * /books/{id}:
  *   patch:
  *     summary: Update an existing book
  *     tags: [Books]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: The ID of the book to update
+ *         schema:
+ *           type: string
  *     requestBody:
  *       required: true
  *       content:
@@ -98,7 +109,7 @@ const router = express.Router();
  *                 type: string
  *               publication_date:
  *                 type: string
- *                 format: date
+ *                 format: date-time
  *               author:
  *                 type: string
  *     responses:
@@ -109,11 +120,13 @@ const router = express.Router();
  *             schema:
  *               type: object
  *               properties:
+ *                 _id:
+ *                   type: string
  *                 title:
  *                   type: string
  *                 publication_date:
  *                   type: string
- *                   format: date
+ *                   format: date-time
  *                 author:
  *                   type: string
  *       400:
@@ -143,6 +156,7 @@ const router = express.Router();
  *       404:
  *         description: Book not found
  */
+
 
 router.post("/", createBook);
 router.get("/", getAllBooks);
