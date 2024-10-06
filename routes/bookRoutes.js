@@ -3,12 +3,14 @@ const {
   createBook,
   getAllBooks,
   updateBook,
+  deleteBook,
 } = require("../controllers/bookController");
 
 const router = express.Router();
 
-router.post("/", createBook); // Create a book
-router.get("/", getAllBooks); // Get all books
-router.patch("/", updateBook); // Edit book
+router.post("/", createBook);
+router.get("/", getAllBooks);
+router.patch("/", updateBook);
+router.delete("/:id", deleteBook);
 
 module.exports = router;

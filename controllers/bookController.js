@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Book = require("../models/book");
 
 // Create a book
@@ -51,8 +52,40 @@ const updateBook = async (req, res) => {
   }
 };
 
+const deleteBook = async (req, res) => {
+  let book_id = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(book_id)) {
+    return res.status(400).json({ message: "Invalid ID format" });
+  }
+
+  try {
+    let book = await Book.findById(book_id);
+    if (!book) {
+      return res.status(404).json({ message: "Book not found" });
+    }
+
+    const deletedBook = await Book.findByIdAndUpdate(
+      book_id,
+      {
+        isDeleted: true,
+      },
+      { new: true }
+    );
+
+    res
+      .status(200)
+      .json({
+        message: "Book marked as deleted successfully",
+        book: deletedBook,
+      });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   createBook,
   getAllBooks,
   updateBook,
+  deleteBook,
 };
