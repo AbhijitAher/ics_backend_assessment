@@ -24,7 +24,7 @@ const getAllBooks = async (req, res) => {
   }
 };
 
-const updateBook = async (req, res) => {
+const  updateBook = async (req, res) => {
   let book_id = req.params.id;
   if (!mongoose.Types.ObjectId.isValid(book_id)) {
     return res.status(400).json({ message: "Invalid ID format" });
@@ -46,6 +46,10 @@ const updateBook = async (req, res) => {
       // },
       { new: true }
     );
+
+    if (!updated_book) {
+      return res.status(404).json({ message: "Book not found" });
+    }    
 
     // console.log(updated_book.publication_date.toDateString());
     res.status(200).json(updated_book);
