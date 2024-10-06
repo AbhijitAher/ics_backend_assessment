@@ -60,18 +60,24 @@ const router = express.Router();
  * @swagger
  * /books:
  *   get:
- *     summary: Get all books or search by keyword
+ *     summary: Retrieve all books or filter them by a keyword in the title or author
  *     tags: [Books]
  *     parameters:
  *       - name: keyword
  *         in: query
  *         required: false
- *         description: Keyword to search for in book titles or authors
+ *         description: Optional keyword to search for in book titles or authors
+ *         schema:
+ *           type: string
+ *       - name: author
+ *         in: query
+ *         required: false
+ *         description: Optional filter to retrieve books by a specific author
  *         schema:
  *           type: string
  *     responses:
  *       200:
- *         description: A list of books or search results
+ *         description: A list of all books or filtered results based on the provided keyword and author
  *         content:
  *           application/json:
  *             schema:
@@ -88,9 +94,12 @@ const router = express.Router();
  *                     format: date-time
  *                   author:
  *                     type: string
+ *       400:
+ *         description: Invalid request parameters
  *       500:
- *         description: Server error
+ *         description: An error occurred while processing the request
  */
+
 /**
  * @swagger
  * /books/{id}:

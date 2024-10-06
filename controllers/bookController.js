@@ -17,20 +17,33 @@ const createBook = async (req, res) => {
 // Get all books
 const getAllBooks = async (req, res) => {
   const keyword = req.query.keyword;
+  const author = req.query.author;
+
+  let additionalFilters = {};
+  if (author) {
+    additionalFilters.author = author;
+  }
+
   try {
     let books;
     if (keyword) {
       books = await Book.find({
-        $or: [
-          { title: { $regex: keyword, $options: "i" } },
-          { author: { $regex: keyword, $options: "i" } },
+        $and: [
+          {
+            $or: [
+              { title: { $regex: keyword, $options: "i" } },
+              { author: { $regex: keyword, $options: "i" } },
+            ],
+          },
+          { isDeleted: { $ne: true } },
+          { ...additionalFilters },
         ],
-        isDeleted: { $ne: true },
         // $text: { $search: keyword }, // this is for searching using text index
       });
     } else {
       books = await Book.find({
         isDeleted: { $ne: true },
+        ...additionalFilters,
       });
     }
 
