@@ -60,11 +60,18 @@ const router = express.Router();
  * @swagger
  * /books:
  *   get:
- *     summary: Get all books
+ *     summary: Get all books or search by keyword
  *     tags: [Books]
+ *     parameters:
+ *       - name: keyword
+ *         in: query
+ *         required: false
+ *         description: Keyword to search for in book titles or authors
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
- *         description: A list of books
+ *         description: A list of books or search results
  *         content:
  *           application/json:
  *             schema:
@@ -84,7 +91,6 @@ const router = express.Router();
  *       500:
  *         description: Server error
  */
-
 /**
  * @swagger
  * /books/{id}:
@@ -156,7 +162,6 @@ const router = express.Router();
  *       404:
  *         description: Book not found
  */
-
 
 router.post("/", createBook);
 router.get("/", getAllBooks);
