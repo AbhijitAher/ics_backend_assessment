@@ -23,7 +23,36 @@ const getAllBooks = async (req, res) => {
   }
 };
 
+const updateBook = async (req, res) => {
+  try {
+    let book_id = req.query.book_id;
+
+    let updateData = req.body;
+    // let { title, publication_date, author } = req.body;
+    console.log({ updateData });
+
+    // updateData.publication_date = updateData.publication_date ? new Date(updateData.publication_date) : undefined;
+    // console.log({up})
+    const updated_book = await Book.findByIdAndUpdate(
+      book_id,
+      { $set: updateData },
+      // {
+      //   title,
+      //   publication_date: publication_date ? new Date(publication_date) : undefined,
+      //   author,
+      // },
+      { new: true }
+    );
+
+    // console.log(updated_book.publication_date.toDateString());
+    res.status(200).json(updated_book);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   createBook,
   getAllBooks,
+  updateBook,
 };
