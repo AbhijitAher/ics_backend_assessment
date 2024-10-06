@@ -25,9 +25,11 @@ const getAllBooks = async (req, res) => {
 };
 
 const updateBook = async (req, res) => {
+  let book_id = req.params.id;
+  if (!mongoose.Types.ObjectId.isValid(book_id)) {
+    return res.status(400).json({ message: "Invalid ID format" });
+  }
   try {
-    let book_id = req.query.book_id;
-
     let updateData = req.body;
     // let { title, publication_date, author } = req.body;
     console.log({ updateData });
@@ -72,12 +74,10 @@ const deleteBook = async (req, res) => {
       { new: true }
     );
 
-    res
-      .status(200)
-      .json({
-        message: "Book marked as deleted successfully",
-        book: deletedBook,
-      });
+    res.status(200).json({
+      message: "Book marked as deleted successfully",
+      book: deletedBook,
+    });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
