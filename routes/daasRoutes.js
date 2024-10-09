@@ -1,6 +1,6 @@
 /**
  * @swagger
- * /v2_analyse:
+ * /daas/v2_analyse:
  *   post:
  *     summary: Analyze a query and save the response to the database
  *     description: Sends the query to the DAAS API for analysis and stores the result in the database.

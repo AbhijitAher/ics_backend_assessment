@@ -1,6 +1,6 @@
 /**
  * @swagger
- * /send-book-notification:
+ * /notify/send-book-notification:
  *   post:
  *     summary: Send email notification for reading a book
  *     description: Sends a reminder email to the user about a specific book to read.
