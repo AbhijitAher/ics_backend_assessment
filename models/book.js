@@ -18,6 +18,9 @@ const BookSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    book_cover_url: {
+      type: String,
+    }
   },
   { timestamps: true }
 );
