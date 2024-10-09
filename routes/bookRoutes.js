@@ -4,7 +4,9 @@ const {
   getAllBooks,
   updateBook,
   deleteBook,
+  uploadBookCover
 } = require("../controllers/bookController");
+const upload = require("../config/multer_config");
 
 const router = express.Router();
 
@@ -172,9 +174,56 @@ const router = express.Router();
  *         description: Book not found
  */
 
+/**
+ * @swagger
+ * /books/upload-book-cover/{bookId}:
+ *   post:
+ *     summary: Upload a book cover for an existing book
+ *     description: This endpoint allows users to upload a book cover image and associate it with an existing book by its ID.
+ *     tags:
+ *       - Books
+ *     parameters:
+ *       - in: path
+ *         name: bookId
+ *         required: true
+ *         description: The ID of the book to which the cover will be added.
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               bookCover:
+ *                 type: string
+ *                 format: binary
+ *                 description: The book cover image file to upload.
+ *     responses:
+ *       200:
+ *         description: Book cover uploaded successfully!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 coverPath:
+ *                   type: string
+ *       400:
+ *         description: Bad request, no bookCover provided.
+ *       404:
+ *         description: Book not found with the specified ID.
+ *       500:
+ *         description: Internal server error, failed to upload the book cover.
+ */
+
 router.post("/", createBook);
 router.get("/", getAllBooks);
 router.patch("/:id", updateBook);
 router.delete("/:id", deleteBook);
+router.post("/upload-book-cover/:bookId",upload.single("bookCover"), uploadBookCover)
 
 module.exports = router;

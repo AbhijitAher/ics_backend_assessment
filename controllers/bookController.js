@@ -116,9 +116,88 @@ const deleteBook = async (req, res) => {
   }
 };
 
+/**
+ * @swagger
+ * /upload-book-cover/{bookId}:
+ *   post:
+ *     summary: Upload a book cover for an existing book
+ *     description: This endpoint allows users to upload a book cover image and associate it with an existing book by its ID.
+ *     tags:
+ *       - Books
+ *     parameters:
+ *       - in: path
+ *         name: bookId
+ *         required: true
+ *         description: The ID of the book to which the cover will be added.
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               bookCover:
+ *                 type: string
+ *                 format: binary
+ *                 description: The book cover image file to upload.
+ *     responses:
+ *       200:
+ *         description: Book cover uploaded successfully!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 coverPath:
+ *                   type: string
+ *       400:
+ *         description: Bad request, no bookCover provided.
+ *       404:
+ *         description: Book not found with the specified ID.
+ *       500:
+ *         description: Internal server error, failed to upload the book cover.
+ */
+
+const uploadBookCover = async (req, res) => {
+  try {
+    const { bookId } = req.params;
+
+    console.log(req.file);
+    if (!req.file) {
+      return res.status(400).json({ message: "Please provide a bookCover." });
+    }
+
+    const coverPath = req.file.path;
+
+    const updatedBook = await Book.findByIdAndUpdate(
+      bookId,
+      { book_cover_url: coverPath },
+      { new: true }
+    );
+
+    if (!updatedBook) {
+      return res.status(404).json({ message: "Book not found." });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Book cover uploaded successfully!", coverPath });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "Failed to upload book cover. Please try again later.",
+    });
+  }
+};
+
 module.exports = {
   createBook,
   getAllBooks,
   updateBook,
   deleteBook,
+  uploadBookCover,
 };
