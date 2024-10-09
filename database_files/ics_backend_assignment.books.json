@@ -1,0 +1,77 @@
+[
+  {
+    "_id": {
+      "$oid": "67026e738af2dbd178ad03e0"
+    },
+    "title": "Book One New",
+    "author": "Author Abhi2",
+    "publication_date": {
+      "$date": "1998-10-12T18:30:00.000Z"
+    },
+    "createdAt": {
+      "$date": "2024-10-06T11:03:15.747Z"
+    },
+    "__v": 0,
+    "updatedAt": {
+      "$date": "2024-10-09T18:26:10.316Z"
+    },
+    "isDeleted": true,
+    "book_cover_url": "uploads/1728498370304-3d_fluffy_pikachu__closeup_cute_and_adorable_c.jpg"
+  },
+  {
+    "_id": {
+      "$oid": "6702cb8aeb9144349175b981"
+    },
+    "title": "Swagger Book",
+    "author": "Abhi",
+    "publication_date": {
+      "$date": "2024-08-06T17:40:07.964Z"
+    },
+    "isDeleted": false,
+    "createdAt": {
+      "$date": "2024-10-06T17:40:26.883Z"
+    },
+    "updatedAt": {
+      "$date": "2024-10-09T18:29:21.012Z"
+    },
+    "__v": 0,
+    "book_cover_url": "uploads/1728498560993-biotech-research-scientist-from-india.png"
+  },
+  {
+    "_id": {
+      "$oid": "6702d4453229c817699360b3"
+    },
+    "title": "SW 3",
+    "author": "Abhi 3",
+    "publication_date": {
+      "$date": "2024-07-06T18:17:17.308Z"
+    },
+    "isDeleted": false,
+    "createdAt": {
+      "$date": "2024-10-06T18:17:41.055Z"
+    },
+    "updatedAt": {
+      "$date": "2024-10-09T18:36:49.593Z"
+    },
+    "__v": 0,
+    "book_cover_url": "uploads/1728499009586-512x512.png"
+  },
+  {
+    "_id": {
+      "$oid": "6702d4533229c817699360b5"
+    },
+    "title": "SW 4",
+    "author": "Rahul 4",
+    "publication_date": {
+      "$date": "2024-07-06T18:17:17.308Z"
+    },
+    "isDeleted": false,
+    "createdAt": {
+      "$date": "2024-10-06T18:17:55.234Z"
+    },
+    "updatedAt": {
+      "$date": "2024-10-06T18:17:55.234Z"
+    },
+    "__v": 0
+  }
+]
